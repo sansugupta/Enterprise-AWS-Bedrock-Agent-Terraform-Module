@@ -24,6 +24,7 @@ In the era of Generative AI, deploying agents manually is error-prone and unscal
 
 ### Current Implementation (Main Branch)
 The current module deploys a **Single-Agent RAG Architecture**. It handles the complete lifecycle of the agent, from IAM roles to serverless compute encryption.
+![alt text](assets/bedrock_architecture.png)
 
 ```mermaid
 graph LR
@@ -166,4 +167,4 @@ This project represents my commitment to building scalable, secure, and modern A
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE)
 
 ---
-*License: MIT | Maintained by [Your Name]*
+* Maintained by [Sanskar Gupta]*
