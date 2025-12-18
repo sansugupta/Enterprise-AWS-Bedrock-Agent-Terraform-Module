@@ -71,17 +71,22 @@ graph TB
 ```
 
 ---
-
-## ✨ Key Features
-
-*   **Modular Design:** Decouples configuration (names, tags) from logic. Designed to be consumed by multiple environments (`dev`, `staging`, `prod`) simultaneously.
-*   **Security First:**
-    *   **Guardrails:** Pre-configured constraints to prevent off-topic hallucinations (e.g., Competitor mentions blocked).
-    *   **Encryption:** Full KMS integration for S3 buckets and CloudWatch Logs.
-    *   **IAM:** Granular, least-privilege policies automatically generated.
-*   **Serverless Action Groups:** automatically zips and deploys Python Lambda functions to act as the Agent's "hands," enabling it to fetch real-time data.
-*   **Dynamic S3 Storage:** Provisions unique S3 buckets for document ingestion with secure access blocks.
-*   **Observability:** Integrated CloudWatch logging for Agent traces and Lambda execution logs.
+🧠 Capability Breakdown
+🤖 Supervisor Agent (The Brain):
+Acts as the single interface for the user.
+Maintains conversation memory and context.
+Uses a Classifier Agent to determine intent (e.g., "Is this a math problem, a database query, or a document search?").
+Orchestrates the workflow by delegating tasks to the appropriate worker.
+👷 Specialized Workers:
+SQL Generator Agent: Converts natural language into AWS Athena PrestoSQL, executes queries via Lambda, and interprets results.
+Context Retrieval Agent: Fetches "Gold" and "Silver" metadata dictionaries from S3 to ensure accurate entity definitions.
+Deep Reasoning Agent: Handles complex logic, comparative analysis, and multi-step math problems without external data dependencies.
+RAG Agent: Performs semantic search against a Vector Knowledge Base (OpenSearch Serverless) to retrieve unstructured policy documents.
+🛡️ Enhanced Guardrails:
+Input Filtering: Blocks incoming PII (SSN, DoB) and off-topic queries (e.g., Competitor mentions) before they reach the LLM.
+Output Masking: Redacts sensitive data from the final response to ensure compliance.
+⚡ Serverless Integration:
+The module will automatically deploy the Python Lambda functions required for the SQL and Context agents to interface with AWS Athena and S3.
 
 ---
 
