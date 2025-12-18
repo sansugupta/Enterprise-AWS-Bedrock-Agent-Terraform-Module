@@ -52,43 +52,31 @@ graph LR
 ```
 
 ### 🌟 Future Roadmap: Multi-Agent Supervisor System
-I am actively developing the next evolution of this module to support **Agentic Workflows**. The upcoming releases will introduce a **Supervisor-Worker** architecture.
 
-```mermaid
-graph TB
-    User[End User / App] -->|Invoke| AgentAlias[Agent Alias<br/>Prod/Dev]
-    
-    AgentAlias --> Agent[Bedrock Agent<br/>Claude 3.5 Sonnet]
-    Agent -->|Check| Guard[Guardrail<br/>Topic Policies]
-    Agent -->|Action Group| Lambda[Orchestration Lambda<br/>Python 3.11]
-    
-    Lambda -->|Retrieve| S3[S3 Bucket<br/>RAG Context Docs]
-    
-    KMS[KMS Customer Managed Key] -.->|Encrypts| S3
-    KMS -.->|Encrypts| Lambda
-    
-    IAM[Least Privilege IAM Roles]
-```
+I am actively developing the next evolution of this module to support **Agentic Workflows**. The upcoming releases will introduce a **Supervisor-Worker architecture**, transforming the solution from a single chatbot into an intelligent orchestration system.
 
----
-🧠 Capability Breakdown
-🤖 Supervisor Agent (The Brain):
-Acts as the single interface for the user.
-Maintains conversation memory and context.
-Uses a Classifier Agent to determine intent (e.g., "Is this a math problem, a database query, or a document search?").
-Orchestrates the workflow by delegating tasks to the appropriate worker.
-👷 Specialized Workers:
-SQL Generator Agent: Converts natural language into AWS Athena PrestoSQL, executes queries via Lambda, and interprets results.
-Context Retrieval Agent: Fetches "Gold" and "Silver" metadata dictionaries from S3 to ensure accurate entity definitions.
-Deep Reasoning Agent: Handles complex logic, comparative analysis, and multi-step math problems without external data dependencies.
-RAG Agent: Performs semantic search against a Vector Knowledge Base (OpenSearch Serverless) to retrieve unstructured policy documents.
-🛡️ Enhanced Guardrails:
-Input Filtering: Blocks incoming PII (SSN, DoB) and off-topic queries (e.g., Competitor mentions) before they reach the LLM.
-Output Masking: Redacts sensitive data from the final response to ensure compliance.
-⚡ Serverless Integration:
-The module will automatically deploy the Python Lambda functions required for the SQL and Context agents to interface with AWS Athena and S3.
+![alt text](assets/bedrock_architecture2.png)
 
----
+### 🧠 Capability Breakdown
+
+1.  **🤖 Supervisor Agent (The Brain):**
+    *   Acts as the single interface for the user.
+    *   Maintains conversation memory and context.
+    *   Uses a **Classifier Agent** to determine intent (e.g., "Is this a math problem, a database query, or a document search?").
+    *   Orchestrates the workflow by delegating tasks to the appropriate worker.
+
+2.  **👷 Specialized Workers:**
+    *   **SQL Generator Agent:** Converts natural language into AWS Athena PrestoSQL, executes queries via Lambda, and interprets results.
+    *   **Context Retrieval Agent:** Fetches "Gold" and "Silver" metadata dictionaries from S3 to ensure accurate entity definitions.
+    *   **Deep Reasoning Agent:** Handles complex logic, comparative analysis, and multi-step math problems without external data dependencies.
+    *   **RAG Agent:** Performs semantic search against a Vector Knowledge Base (OpenSearch Serverless) to retrieve unstructured policy documents.
+
+3.  **🛡️ Enhanced Guardrails:**
+    *   **Input Filtering:** Blocks incoming PII (SSN, DoB) and off-topic queries (e.g., Competitor mentions) before they reach the LLM.
+    *   **Output Masking:** Redacts sensitive data from the final response to ensure compliance.
+
+4.  **⚡ Serverless Integration:**
+    *   The module will automatically deploy the Python Lambda functions required for the SQL and Context agents to interface with **AWS Athena** and **S3**.
 
 ## 📂 Project Structure
 
