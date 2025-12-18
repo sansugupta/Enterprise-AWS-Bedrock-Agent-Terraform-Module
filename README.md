@@ -26,31 +26,6 @@ In the era of Generative AI, deploying agents manually is error-prone and unscal
 The current module deploys a **Single-Agent RAG Architecture**. It handles the complete lifecycle of the agent, from IAM roles to serverless compute encryption.
 ![alt text](assets/bedrock_architecture.png)
 
-```mermaid
-graph LR
-    subgraph "Client Environment"
-        User[End User / App] -->|Invoke| AgentAlias
-    end
-    subgraph "Terraform Module Scope"
-        subgraph "Bedrock Service"
-            AgentAlias[Agent Alias<br/>Prod/Dev] --> Agent[Bedrock Agent<br/>Claude 3.5 Sonnet]
-            Agent -->|Check| Guard[Guardrail<br/>Topic Policies]
-            Agent -->|Action Group| Lambda
-        end
-        subgraph "Compute & Security"
-            Lambda[Orchestration Lambda<br/>Python 3.11]
-            IAM[Least Privilege IAM Roles]
-            KMS[KMS Customer Managed Key]
-        end
-        subgraph "Data Layer"
-            S3[S3 Bucket<br/>RAG Context Docs]
-            Lambda -->|Retrieve| S3
-            KMS -.->|Encrypts| S3
-            KMS -.->|Encrypts| Lambda
-        end
-    end
-```
-
 ### 🌟 Future Roadmap: Multi-Agent Supervisor System
 
 I am actively developing the next evolution of this module to support **Agentic Workflows**. The upcoming releases will introduce a **Supervisor-Worker architecture**, transforming the solution from a single chatbot into an intelligent orchestration system.
