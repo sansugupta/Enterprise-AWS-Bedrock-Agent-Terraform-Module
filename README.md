@@ -130,7 +130,7 @@ I am continuously iterating on this module to bring state-of-the-art GenAI capab
 
 ## 🤝 Connect
 
-This project represents my commitment to building scalable, secure, and modern AI infrastructure. If you are interested in **Cloud Architecture, Terraform, or Generative AI**,let's connect!
+This project represents my commitment to building scalable, secure, and modern AI infrastructure. If you are interested in **Cloud Architecture, Terraform, or Generative AI**, let's connect!
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/YOUR-LINKEDIN-HANDLE)
 
